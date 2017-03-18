@@ -8,8 +8,8 @@ var config = {
     app: {
       name: 'ipn-convocatoria'
     },
-    port: process.env.PORT || 3009,
-    db: 'mongodb://localhost/ipn-convocatoria-development'
+    port: process.env.PORT || 3001,
+    db: 'mongodb://localhost/green-shark-dev'
   },
 
   test: {
