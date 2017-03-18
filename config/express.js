@@ -51,7 +51,8 @@ module.exports = function(app, config) {
   app.use(flash());
 
 
-  app.use(express.static(config.root + '/public'));
+//  app.use(express.static(config.root + '/public'));
+  app.use("/styles", express.static(__dirname + '/styles'));
   app.use(methodOverride());
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
