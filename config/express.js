@@ -12,6 +12,7 @@ var swig = require('swig');
 var session = require('express-session');
 var flash  = require('connect-flash');
 var multer = require('multer');
+var cons = require('consolidate');
 require('./passport')(passport); // pass passport for configuration
 
 
@@ -22,14 +23,16 @@ module.exports = function(app, config) {
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
 
-  app.engine('swig', swig.renderFile);
   if(env == 'development'){
     app.set('view cache', false);
     swig.setDefaults({ cache: false });
   }
+  app.engine('html', cons.swig)
   app.set('views', config.root + '/app/views');
-  app.set('view engine', 'swig');
+ app.set('view engine', 'html');
 
+
+console.log("ERROR"+config.root + '/app/views/')
 
 
   // app.use(favicon(config.root + '/public/img/favicon.ico'));
@@ -51,7 +54,7 @@ module.exports = function(app, config) {
   app.use(flash());
 
 
-  app.use(express.static(config.root + '/public'));
+  app.use(express.static('public'));
   app.use(methodOverride());
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
